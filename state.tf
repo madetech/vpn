@@ -1,4 +1,6 @@
 terraform {
+  required_version = "~> 0.12.0"
+
   backend "s3" {
     //    dynamodb_table = "not used in this project due to low useage"
     bucket  = "foxpass-vpn-project-state"
