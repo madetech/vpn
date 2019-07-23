@@ -10,10 +10,6 @@ module "vpn_label" {
   name       = "vpn"
   attributes = ["public"]
   delimiter  = "-"
-
-  additional_tag_map = {
-    propagate_at_launch = "true"
-  }
 }
 
 data "aws_ami" "foxpass_ami" {
@@ -93,15 +89,17 @@ locals {
   })
 }
 
-resource "aws_launch_configuration" "foxpass_vpn" {
-  name_prefix = "${module.vpn_label.id}-"
+resource "aws_instance" "foxpass_vpn" {
+  tags = module.vpn_label.tags
 
   associate_public_ip_address = true
-  security_groups             = [aws_security_group.vpn_traffic.id]
+  vpc_security_group_ids      = [aws_security_group.vpn_traffic.id]
+  subnet_id                   = aws_subnet.public.id
   key_name                    = aws_key_pair.key.key_name
 
-  image_id      = data.aws_ami.foxpass_ami.image_id
+  ami           = data.aws_ami.foxpass_ami.image_id
   instance_type = "t2.micro"
+
 
   user_data = <<EOF
 #!/bin/bash
@@ -120,18 +118,6 @@ EOF
   }
 }
 
-resource "aws_autoscaling_group" "foxpass_vpn" {
-  name = module.vpn_label.name
-  tags = module.vpn_label.tags_as_list_of_maps
-
-  max_size = 2
-  min_size = 1
-  desired_capacity = 1
-
-  health_check_grace_period = 150
-  health_check_type = "EC2"
-
-  vpc_zone_identifier = [aws_subnet.public.id]
-  launch_configuration = aws_launch_configuration.foxpass_vpn.name
+output "hostname" {
+  value = aws_instance.foxpass_vpn.public_dns
 }
-
