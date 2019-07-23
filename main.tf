@@ -117,7 +117,3 @@ EOF
     create_before_destroy = true
   }
 }
-
-output "hostname" {
-  value = aws_instance.foxpass_vpn.public_dns
-}
