@@ -1,0 +1,7 @@
+dns_primary   = 1.1.1.1
+dns_secondary = 1.0.0.1
+
+public_dns_name = CHANGE_ME
+foxpass_api_key = CHANGE_ME
+shared_psk      = CHANGE_ME
+ssh_public_key  = CHANGE_ME
