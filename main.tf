@@ -87,10 +87,13 @@ locals {
       foxpass_api_key = var.foxpass_api_key,
       //      require_groups = ["vpn"]
   })
+  private_ip = "172.17.0.81"
 }
 
 resource "aws_instance" "foxpass_vpn" {
   tags = module.vpn_label.tags
+
+  private_ip = local.private_ip
 
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.vpn_traffic.id]
@@ -116,4 +119,12 @@ EOF
   lifecycle {
     create_before_destroy = true
   }
+}
+
+resource "aws_eip" "static_ip" {
+  vpc = true
+
+  instance = aws_instance.foxpass_vpn.id
+  depends_on = ["aws_internet_gateway.gw"]
+  associate_with_private_ip = local.private_ip
 }
