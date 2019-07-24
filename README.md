@@ -1,11 +1,11 @@
 # Foxpass - VPN
 
-This repo contains a terraform project that setups a ubuntu based VM built by Foxpass to use with there services.
-The end result is a dns address that users can use there google/office365 creds to connect to.
+This repo contains a Terraform project that setups a ubuntu based VM built by Foxpass to use with there services.
+The result is a DNS address that users can use there google/office365 creds to connect to.
 
 Links:
 - [VM built by Foxpass](https://github.com/foxpass/foxpass-ipsec-vpn) on to AWS
-- [Official doc for the vpn server](https://docs.foxpass.com/docs/set-up-a-vpn)
+- [Official doc for the VPN server](https://docs.foxpass.com/docs/set-up-a-vpn)
  
 
 ## Prerequisites
@@ -21,7 +21,7 @@ Links:
 git clone https://github.com/madetech/vpn.git
 ```
 
-### 2. Populate a `variables.tf` file
+### 2. Populate `variables.tf` file
 ```bash
 cp variables.tf.example variables.tf
 ```
@@ -29,21 +29,21 @@ Edit `variables.tf` using your preferred editor using doc blow as a guide
 
 ### Variables explanation
 #### `dns_primary` / `dns_secondary` 
-can optionally changed to your desired dns provider
+Can optionally be changed to your desired DNS provider
 #### `public_dns_name`
-If you want to create a domain name that points to the public ip of the vpn set the domain name here. 
-Once terraform is run it will output a set of dns servers that you can use to point your domain/subdomain using a NS server entry
+If you want to create a domain name that points to the public ip of the VPN set the domain name here. 
+Once terraform is run it will output a set of DNS servers that you can use to point your domain/subdomain using an NS server entry
 #### `foxpass_api_key`
 This must be set for the server to be able to authenticate users
-your Foxpass admin can create a new api key here -> https://console.foxpass.com/settings/
+your Foxpass admin can create a new API key here -> https://console.foxpass.com/settings/
 #### `shared_psk`
-This is the first layer shared password that all users must enter before entering there user creds.
+This is the first layer shared password that all users must enter before entering their user creds.
 ***This should be a long secure password.***
 #### `ssh_public_key`
-A ssh public key used to ssh into the VM for maintenance purposes. [guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
+An ssh public key used to ssh into the VM for maintenance purposes. [guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
 
-###  3. Initialise Terraform
-The [state.tf](./state.tf) sets up and configures terraform to save is internal state remotely in aws.
+###  3. Initialize Terraform
+The [state.tf](./state.tf) sets up and configures Terraform to save its internal state remotely in AWS.
 
 There are 2 options available:
 - Comment out this entire file (Warning: **Will result in changes only being possible from your current machine**)  
@@ -72,12 +72,12 @@ terraform {
 <hr/>
 
 ```bash
-# Download deps and setup state 
-terrafrom init
+# Download dependencies and set up state 
+terraform init
 # show and run setup (this step requires the user to type `yes` midway though)
-terrafrom apply
+terraform apply
 ```
-Terraform should now output the dns name server addresses as well as public ip that can be used for the vpn like so
+Terraform should now output the DNS name server addresses as well as public IP that can be used for the VPN like so
 ```hcl-terraform
 
 ```
@@ -91,4 +91,4 @@ Terraform should now output the dns name server addresses as well as public ip t
 <hr/>
 
 ## Contributing
-PR's welcome! (Please open a issue before submitting any large changes) 
+PR's welcome! (Please open an issue before submitting any large changes) 
