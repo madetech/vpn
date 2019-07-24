@@ -1,7 +1,7 @@
 # Foxpass - VPN
 
 This repo contains a Terraform project that sets up an Ubuntu based VM built by Foxpass to use with their services.
-The result is a DNS address that users can use with their Google/Office365 credentials to connect with.
+The result is a vpn server (with DNS and static ip) that users can use with their Google/Office365 credentials to connect t0.
 
 Links:
 - [VM built by Foxpass](https://github.com/foxpass/foxpass-ipsec-vpn) on to AWS
