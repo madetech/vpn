@@ -115,10 +115,6 @@ sudo /opt/bin/config.py /root/vpn_config.json
 
 echo 'finished user_data setup'
 EOF
-
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_eip" "static_ip" {
