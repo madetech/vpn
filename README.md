@@ -6,6 +6,11 @@ The result is a vpn server (with DNS and static ip) that users can use with thei
 Links:
 - [VM built by Foxpass](https://github.com/foxpass/foxpass-ipsec-vpn) on to AWS
 - [Official doc for the VPN server](https://docs.foxpass.com/docs/set-up-a-vpn)
+
+#### File breakdown
+- [network.tf](./network.tf) vpc setup
+- [state.tf](./state.tf) terraform remote sate management
+- [main.tf](./main.tf) vpn server setup
  
 
 ## Prerequisites
