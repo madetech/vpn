@@ -15,7 +15,17 @@ Links:
 
 ## Using/Installing
 
-### 1. Clone this repository:
+### 1. Enable usage of AMI
+
+This project uses the prebuilt AMI's [(source)](https://github.com/foxpass/foxpass-ipsec-vpn) from Foxpas.
+You must accept these terms and conditions before AWS will allow you to launch an instance
+
+While logged in to the target AWS account:
+- Go to https://aws.amazon.com/marketplace/pp?sku=cdsjmv5modgffkrgs4bi5ogtn
+- Click subscribe (free)
+- Click accept terms and conditions
+
+### 2. Clone this repository:
 ```bash
 # Note: The following command is using HTTPS. You can use SSH.
 git clone https://github.com/madetech/vpn.git
@@ -75,7 +85,7 @@ terraform {
 # Download dependencies and set up state 
 terraform init
 # show and run setup (this step requires the user to type `yes` midway though)
-terraform apply
+terraform applyK
 ```
 Terraform should now output the DNS name server addresses as well as public IP that can be used for the VPN like so (these will differ to yours)
 ```hcl-terraform
