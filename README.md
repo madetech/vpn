@@ -33,7 +33,7 @@ git clone https://github.com/madetech/vpn.git
 
 ### 3. Populate `variables.tf` file
 ```bash
-cp variables.tf.example variables.tf
+cp terraform.tfvars.example terraform.tfvars
 ```
 Edit `variables.tf` using your preferred editor using doc blow as a guide
 
