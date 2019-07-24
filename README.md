@@ -1,7 +1,7 @@
 # Foxpass - VPN
 
-This repo contains a Terraform project that setups a ubuntu based VM built by Foxpass to use with there services.
-The result is a DNS address that users can use there google/office365 creds to connect to.
+This repo contains a Terraform project that sets up an Ubuntu based VM built by Foxpass to use with their services.
+The result is a DNS address that users can use with their Google/Office365 credentials to connect with.
 
 Links:
 - [VM built by Foxpass](https://github.com/foxpass/foxpass-ipsec-vpn) on to AWS
@@ -17,8 +17,8 @@ Links:
 
 ### 1. Enable usage of AMI
 
-This project uses the prebuilt AMI's [(source)](https://github.com/foxpass/foxpass-ipsec-vpn) from Foxpas.
-You must accept these terms and conditions before AWS will allow you to launch an instance
+This project uses the prebuilt AMI's [(source)](https://github.com/foxpass/foxpass-ipsec-vpn) from Foxpass.
+You must accept these terms and conditions otherwise AWS will not allow you to launch an instance.
 
 While logged in to the target AWS account:
 - Go to https://aws.amazon.com/marketplace/pp?sku=cdsjmv5modgffkrgs4bi5ogtn
@@ -35,22 +35,22 @@ git clone https://github.com/madetech/vpn.git
 ```bash
 cp terraform.tfvars.example terraform.tfvars
 ```
-Edit `variables.tf` using your preferred editor using doc blow as a guide
+Edit `variables.tf` using your preferred editor using the example below as a guide.
 
 ### Variables explanation
 #### `dns_primary` / `dns_secondary` 
 Can optionally be changed to your desired DNS provider
 #### `public_dns_name`
-If you want to create a domain name that points to the public ip of the VPN set the domain name here. 
+If you want to create a domain name that points to the public IP address of the VPN, set the domain name here. 
 Once terraform is run it will output a set of DNS servers that you can use to point your domain/subdomain using an NS server entry
 #### `foxpass_api_key`
-This must be set for the server to be able to authenticate users
+This must be set for the server to be able to authenticate users,
 your Foxpass admin can create a new API key here -> https://console.foxpass.com/settings/
 #### `shared_psk`
 This is the first layer shared password that all users must enter before entering their user creds.
 ***This should be a long secure password.***
 #### `ssh_public_key`
-An ssh public key used to ssh into the VM for maintenance purposes. [guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
+An ssh public key used to ssh into the VM for maintenance purposes: [guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
 
 ###  4. Initialize Terraform
 The [state.tf](./state.tf) sets up and configures Terraform to save its internal state remotely in AWS.
@@ -63,8 +63,8 @@ There are 2 options available:
 <hr/>
 
 #### **When running in a new account**
-- Comment out the "backend" block in the [state.tf](./state.tf) (this is to bootstrap the first time run)
-- Rename the 2 usages of the bucket name "foxpass-vpn-project-state" to something unique
+- Comment out the `backend` block in the [state.tf](./state.tf) (this is to bootstrap the initial run)
+- Rename the 2 usages of the bucket name `foxpass-vpn-project-state` to something unique
 ```hcl-terraform
 terraform {
   required_version = "~> 0.12.0"
@@ -85,7 +85,7 @@ terraform {
 # Download dependencies and set up state 
 terraform init
 # show and run setup (this step requires the user to type `yes` midway though)
-terraform applyK
+terraform apply
 ```
 Terraform should now output the DNS name server addresses as well as public IP that can be used for the VPN like so (these will differ to yours)
 ```hcl-terraform
@@ -104,10 +104,10 @@ instance_ip_address = 192.0.2.0
 <hr/>
 
 #### **When running in a new account and using remote state**
-- Now UnComment out the "backend" block that we previously commented out
+-  Uncomment the `backend` block that we previously commented out
 - Rerun `terraform init` and answer `yes` when prompted to migrate the state
 
 <hr/>
 
 ## Contributing
-PR's welcome! (Please open an issue before submitting any large changes) 
+PRs are welcome! Please open an issue before submitting any large changes.
