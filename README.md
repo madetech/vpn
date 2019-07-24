@@ -21,7 +21,7 @@ Links:
 git clone https://github.com/madetech/vpn.git
 ```
 
-### 2. Populate `variables.tf` file
+### 3. Populate `variables.tf` file
 ```bash
 cp variables.tf.example variables.tf
 ```
@@ -42,7 +42,7 @@ This is the first layer shared password that all users must enter before enterin
 #### `ssh_public_key`
 An ssh public key used to ssh into the VM for maintenance purposes. [guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
 
-###  3. Initialize Terraform
+###  4. Initialize Terraform
 The [state.tf](./state.tf) sets up and configures Terraform to save its internal state remotely in AWS.
 
 There are 2 options available:
@@ -77,8 +77,17 @@ terraform init
 # show and run setup (this step requires the user to type `yes` midway though)
 terraform apply
 ```
-Terraform should now output the DNS name server addresses as well as public IP that can be used for the VPN like so
+Terraform should now output the DNS name server addresses as well as public IP that can be used for the VPN like so (these will differ to yours)
 ```hcl-terraform
+Outputs:
+
+dns_nameservers = [
+  "ns-1111.awsdns-66.org",
+  "ns-1112.awsdns-67.co.uk",
+  "ns-1113.awsdns-68.com",
+  "ns-1114.awsdns-69.net",
+]
+instance_ip_address = 192.0.2.0
 
 ```
 
